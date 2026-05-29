@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watch Page - Anidubflix</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/player.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <svg width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff003c" />
+              <stop offset="100%" stop-color="#00ffe7" />
+            </linearGradient>
+          </defs>
+          <rect x="2" y="5" width="30" height="30" rx="6" fill="url(#logo-grad)" opacity="0.15" stroke="url(#logo-grad)" stroke-width="1.5"/>
+          <path d="M12 12L22 20L12 28V12Z" fill="url(#logo-grad)"/>
+          <text x="42" y="27" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="20" fill="url(#logo-grad)" style="letter-spacing: 0.5px;">ANIDUB</text>
+          <text x="122" y="27" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="20" fill="#ffffff" style="letter-spacing: 0.5px;">FLIX</text>
+        </svg>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="anime.html">Anime</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="watch-container">
+    <div style="padding-left: 4%;">
+      <div class="player-wrapper">
+        <iframe id="watch-iframe" allowfullscreen></iframe>
+      </div>
+      <div class="player-controls-details">
+        <div class="watch-info-header">
+          <div>
+            <h1 id="watch-title" style="font-size: 1.5rem;"></h1>
+            <h3 id="watch-ep-title" style="font-size: 1rem; color: var(--text-secondary); margin-top: 5px;"></h3>
+          </div>
+          <div class="watch-actions">
+            <a id="download-btn" target="_blank" class="btn btn-secondary"><i class="fas fa-download"></i> Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding-right: 4%;">
+      <div class="episode-sidebar">
+        <div class="ep-list-header">Episodes List</div>
+        <div class="ep-grid" id="ep-grid-list"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script src="js/player.js"></script>
+</body>
+</html>
