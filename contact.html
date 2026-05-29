@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request Anime & Contact - Anidubflix</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .contact-card {
+      background: var(--card-color);
+      border: 1px solid var(--border-glass);
+      max-width: 600px;
+      margin: 120px auto 40px;
+      padding: 2.5rem;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-glass);
+      color: white;
+      padding: 0.8rem;
+      border-radius: 6px;
+      outline: none;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--accent-color);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 10px rgba(255, 0, 60, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <svg width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff003c" />
+              <stop offset="100%" stop-color="#00ffe7" />
+            </linearGradient>
+          </defs>
+          <rect x="2" y="5" width="30" height="30" rx="6" fill="url(#logo-grad)" opacity="0.15" stroke="url(#logo-grad)" stroke-width="1.5"/>
+          <path d="M12 12L22 20L12 28V12Z" fill="url(#logo-grad)"/>
+          <text x="42" y="27" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="20" fill="url(#logo-grad)" style="letter-spacing: 0.5px;">ANIDUB</text>
+          <text x="122" y="27" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="20" fill="#ffffff" style="letter-spacing: 0.5px;">FLIX</text>
+        </svg>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="anime.html">Anime</a></li>
+        <li><a href="contact.html" class="active">Request Anime</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="contact-card">
+    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Anime Request & Contact Form</h2>
+    <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 0.95rem;">Can't find your favorite Hindi Dubbed anime? Let us know!</p>
+    
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST"> 
+      <div class="form-group">
+        <label for="anime-name">Anime Title</label>
+        <input type="text" name="anime-name" id="anime-name" required placeholder="e.g. Jujutsu Kaisen S2">
+      </div>
+      <div class="form-group">
+        <label for="dub-type">Dub Preference</label>
+        <select name="dub-type" id="dub-type">
+          <option value="Official Hindi Dub">Official Hindi Dub</option>
+          <option value="Fan Hindi Dub">Fan Hindi Dub</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="notes">Additional Information</label>
+        <textarea name="notes" id="notes" rows="4" placeholder="Any specific details, source link if fan-dubbed..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 0.9rem;">Submit Request</button>
+    </form>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
