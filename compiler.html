@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anidubflix JSON Compiler - Fully Responsive & Themes</title>
+  <style>
+    /* CSS Variables for Dynamic Theme Changing */
+    #termux-root {
+      --bg: #050508;
+      --panel-bg: #0a0a0f;
+      --accent: #00ff66;
+      --secondary: #00ffff;
+      --text-main: #00ff66;
+      --text-alt: #a0a0ff;
+      --border: #1f4d2b;
+
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Courier New', Courier, monospace;
+      padding: 15px;
+      box-sizing: border-box;
+      min-height: 100vh;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    /* Theme 2: Matrix Cyan */
+    #termux-root.theme-matrix {
+      --bg: #020617;
+      --panel-bg: #0f172a;
+      --accent: #06b6d4;
+      --secondary: #f43f5e;
+      --text-main: #38bdf8;
+      --text-alt: #ec4899;
+      --border: #0284c7;
+    }
+
+    /* Theme 3: Fallout Amber */
+    #termux-root.theme-amber {
+      --bg: #0a0702;
+      --panel-bg: #140e05;
+      --accent: #ffb000;
+      --secondary: #ffcc00;
+      --text-main: #ffb000;
+      --text-alt: #ffd700;
+      --border: #664400;
+    }
+
+    /* Theme 4: Dracula Vampire */
+    #termux-root.theme-dracula {
+      --bg: #1e1e2e;
+      --panel-bg: #252538;
+      --accent: #cba6f7;
+      --secondary: #f5c2e7;
+      --text-main: #f5e0dc;
+      --text-alt: #b4befe;
+      --border: #44475a;
+    }
+
+    /* Theme 5: MS-DOS Blue */
+    #termux-root.theme-dos {
+      --bg: #000088;
+      --panel-bg: #0000aa;
+      --accent: #ffffff;
+      --secondary: #ffff55;
+      --text-main: #ffffff;
+      --text-alt: #ffff55;
+      --border: #ffffff;
+    }
+    
+    #termux-root h1, #termux-root h2, #termux-root h3 {
+      color: var(--secondary);
+      text-shadow: 0 0 5px rgba(0, 255, 255, 0.15);
+      font-weight: bold;
+    }
+
+    #termux-root .terminal-header {
+      border-bottom: 2px dashed var(--accent);
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      line-height: 1.4;
+    }
+
+    /* Dynamic ASCII scale to fit tiny screens */
+    #termux-root .ascii-logo {
+      font-size: clamp(0.35rem, 1.2vw, 0.95rem);
+      line-height: 1.2;
+      margin: 0 0 15px 0;
+      white-space: pre;
+      overflow-x: auto;
+      color: var(--accent);
+    }
+
+    /* 100% Autofit Grid Engine */
+    #termux-root .terminal-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    @media (min-width: 1024px) {
+      #termux-root .terminal-grid {
+        grid-template-columns: 1.2fr 1fr;
+      }
+    }
+
+    #termux-root .input-panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--accent);
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      box-sizing: border-box;
+    }
+
+    #termux-root .form-group {
+      margin-bottom: 15px;
+    }
+
+    #termux-root label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--secondary);
+      font-size: 0.9rem;
+    }
+
+    #termux-root input, #termux-root select, #termux-root textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 10px;
+      box-sizing: border-box;
+      font-family: 'Courier New', Courier, monospace;
+      outline: none;
+      font-size: 0.95rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    #termux-root input:focus, #termux-root select:focus, #termux-root textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 8px rgba(0, 255, 255, 0.15);
+    }
+
+    /* Auto-wrap form controls on super narrow mobile views */
+    #termux-root .inline-group {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    @media (min-width: 480px) {
+      #termux-root .inline-group {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Episode Row Styles */
+    #termux-root .episode-box {
+      border: 1px dashed var(--border);
+      padding: 15px;
+      margin-bottom: 15px;
+      background: rgba(0, 0, 0, 0.2);
+      position: relative;
+      border-radius: 4px;
+    }
+
+    #termux-root .episode-box .remove-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #ff003c;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      border-radius: 4px;
+    }
+
+    /* Terminal Action Buttons */
+    #termux-root .btn-terminal {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 10px 18px;
+      font-weight: bold;
+      font-family: 'Courier New', Courier, monospace;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-block;
+      text-transform: uppercase;
+      margin-right: 10px;
+      margin-top: 10px;
+      border-radius: 4px;
+    }
+
+    #termux-root .btn-terminal:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 255, 255, 0.2);
+    }
+
+    #termux-root .btn-cyan {
+      background: var(--secondary);
+      color: #000;
+    }
+
+    /* Outputs Panel */
+    #termux-root .output-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    #termux-root .terminal-box {
+      background: var(--panel-bg);
+      border: 1px solid var(--secondary);
+      padding: 20px;
+      border-radius: 6px;
+      position: relative;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    #termux-root .terminal-box::before {
+      content: "[ " attr(data-title) " ]";
+      position: absolute;
+      top: -10px;
+      left: 15px;
+      background: var(--bg);
+      padding: 0 8px;
+      font-size: 0.8rem;
+      color: var(--secondary);
+    }
+
+    #termux-root pre.code-output {
+      margin: 15px 0 0 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 0.85rem;
+      color: var(--text-alt);
+      max-height: 280px;
+      overflow-y: auto;
+      border: 1px solid var(--border);
+      padding: 12px;
+      background: var(--bg);
+      border-radius: 4px;
+    }
+
+    /* Interactive Theme Changer Bar */
+    #termux-root .theme-switcher-bar {
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    #termux-root .theme-btn {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 6px 12px;
+      font-family: 'Courier New', Courier, monospace;
+      cursor: pointer;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    #termux-root .theme-btn:hover {
+      background: var(--accent);
+      color: #000;
+    }
+
+    #termux-root .blink {
+      animation: blinker 1s linear infinite;
+    }
+
+    @keyframes blinker {
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="termux-root">
+    
+    <div class="terminal-header">
+      <pre class="ascii-logo">
+██████╗ ██╗  ██╗███████╗██╗     ██╗██╗  ██╗    ███████╗███████╗████████╗██╗   ██╗██████╗ 
+██╔══██╗██║  ██║██╔════╝██║     ██║╚██╗██╔╝    ██╔════╝██╔════╝╚══██╔══╝██║   ██║██╔══██╗
+██████╔╝███████║█████╗  ██║     ██║ ╚███╔╝     ███████╗█████╗     ██║   ██║   ██║██████╔╝
+██╔═══╝ ██╔══██║██╔══╝  ██║     ██║ ██╔██╗     ╚════██║██╔══╝     ██║   ██║   ██║██╔═══╝ 
+██║     ██║  ██║██║     ███████╗██║██╔╝ ██╗    ███████║███████╗   ██║   ╚██████╔╝██║     
+╚═╝     ╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝╚═╝  ╚═╝    ╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝     
+      </pre>
+      <div style="font-size: 0.95rem; margin-bottom: 15px;">
+        > PURPOSE: COMPILING DATA ENTRIES FOR <span style="color: #ff003c; font-weight: bold;">ANIDUBFLIX</span> METADATA SCHEMES<br>
+        > STATUS: ACTIVE AND WAITING FOR PAYLOAD... <span class="blink">█</span>
+      </div>
+
+      <!-- Theme Switcher System -->
+      <div class="theme-switcher-bar">
+        <span style="color: var(--secondary); font-size: 0.85rem; font-weight: bold;">[SET THEME]:</span>
+        <button class="theme-btn" onclick="switchTheme('')">1. TERMUX</button>
+        <button class="theme-btn" onclick="switchTheme('matrix')">2. MATRIX</button>
+        <button class="theme-btn" onclick="switchTheme('amber')">3. AMBER</button>
+        <button class="theme-btn" onclick="switchTheme('dracula')">4. DRACULA</button>
+        <button class="theme-btn" onclick="switchTheme('dos')">5. MS-DOS</button>
+      </div>
+    </div>
+
+    <div class="terminal-grid">
+      
+      <!-- INPUT FORM AREA -->
+      <div class="input-panel">
+        <h2 style="margin-top: 0; margin-bottom: 20px;">[INPUT PANEL]</h2>
+        
+        <div class="form-group">
+          <label for="anime-title">Anime Title</label>
+          <input type="text" id="anime-title" placeholder="e.g. Demon Slayer: Kimetsu no Yaiba (Season 1)" required oninput="generateId(this.value)">
+        </div>
+
+        <div class="inline-group">
+          <div class="form-group">
+            <label for="anime-id">Anime ID (Auto-Generated)</label>
+            <input type="text" id="anime-id" placeholder="e.g. demon-slayer-s1" required>
+          </div>
+          <div class="form-group">
+            <label for="release-year">Release Year</label>
+            <input type="text" id="release-year" placeholder="e.g. 2019" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" rows="3" placeholder="A family is attacked by demons..." required></textarea>
+        </div>
+
+        <div class="inline-group">
+          <div class="form-group">
+            <label for="poster-url">Poster Image URL</label>
+            <input type="text" id="poster-url" placeholder="https://files.catbox.moe/t6ezpv.jpg" required>
+          </div>
+          <div class="form-group">
+            <label for="banner-url">Banner Image URL</label>
+            <input type="text" id="banner-url" placeholder="https://files.catbox.moe/pfimx3.jpg" required>
+          </div>
+        </div>
+
+        <div class="inline-group">
+          <div class="form-group">
+            <label for="anime-type">Content Type</label>
+            <select id="anime-type">
+              <option value="Series">Series</option>
+              <option value="Movie">Movie</option>
+              <option value="OVA">OVA</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="dub-type">Dub Type</label>
+            <select id="dub-type">
+              <option value="Official Dub">Official Dub</option>
+              <option value="Fan Dub">Fan Dub</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="inline-group">
+          <div class="form-group">
+            <label for="rating">Rating</label>
+            <input type="text" id="rating" placeholder="e.g. 8.7" required>
+          </div>
+          <div class="form-group">
+            <label for="genres">Genres (Comma separated)</label>
+            <input type="text" id="genres" placeholder="Action, Fantasy, Adventure" required>
+          </div>
+        </div>
+
+        <div class="inline-group" style="margin-bottom: 20px;">
+          <div class="form-group" style="display:flex; align-items:center; gap: 8px;">
+            <input type="checkbox" id="trending" style="width:auto;">
+            <label for="trending" style="margin:0; cursor: pointer;">Set as Trending</label>
+          </div>
+          <div class="form-group" style="display:flex; align-items:center; gap: 8px;">
+            <input type="checkbox" id="latest" style="width:auto;">
+            <label for="latest" style="margin:0; cursor: pointer;">Set as Latest Release</label>
+          </div>
+        </div>
+
+        <!-- Dynamic Episodes Section -->
+        <h3 style="border-bottom: 1px solid var(--border); padding-bottom: 5px; margin-top: 25px;">[EPISODES STREAMING ENGINE]</h3>
+        <div id="episodes-container">
+          <!-- Default Row -->
+          <div class="episode-box" id="ep-row-1">
+            <div class="inline-group">
+              <div class="form-group">
+                <label>Episode Number</label>
+                <input type="number" class="ep-number" value="1" min="1" required>
+              </div>
+              <div class="form-group">
+                <label>Episode Title</label>
+                <input type="text" class="ep-title" value="Cruelty" placeholder="Episode title..." required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Embed / Iframe URL</label>
+              <input type="text" class="ep-embed" value="https://www.youtube.com/embed/dQw4w9WgXcQ" placeholder="https://..." required>
+            </div>
+            <div class="form-group">
+              <label>Download Link</label>
+              <input type="text" class="ep-download" value="https://example.com/download" placeholder="https://..." required>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-terminal btn-cyan" onclick="addEpisodeRow()">+ Add Episode</button>
+        <button type="button" class="btn-terminal" onclick="generateCompilerOutput()">COMPILE PAYLOAD</button>
+      </div>
+
+      <!-- COMPILER TERMINAL OUTPUTS -->
+      <div class="output-panel">
+        
+        <!-- Individual Anime Object File -->
+        <div class="terminal-box" data-title="data/anime/<anime-id>.json">
+          <p style="color: var(--text-main); font-size:0.85rem; margin-top:5px;">This object details the whole dynamic page. Save this as a file with your Anime ID name inside "data/anime/".</p>
+          <pre id="output-individual-json" class="code-output">Empty output...</pre>
+          <button type="button" class="btn-terminal btn-cyan" onclick="copyContent('output-individual-json')">Copy Data</button>
+          <a id="download-indiv-btn" style="display:none;" class="btn-terminal">Download .json</a>
+        </div>
+
+        <!-- Main Index Array block -->
+        <div class="terminal-box" data-title="Add to data/anime-index.json">
+          <p style="color: var(--text-main); font-size:0.85rem; margin-top:5px;">Append/Push this block directly inside your main index.json array file to list on Homepage & Search views.</p>
+          <pre id="output-index-json" class="code-output">Empty output...</pre>
+          <button type="button" class="btn-terminal btn-cyan" onclick="copyContent('output-index-json')">Copy Data</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    let episodeCount = 1;
+
+    // Theme Switcher Controller
+    function switchTheme(themeName) {
+      const root = document.getElementById('termux-root');
+      root.className = ''; // reset previous theme styles
+      if (themeName) {
+        root.classList.add('theme-' + themeName);
+      }
+    }
+
+    // Slug Generator
+    function generateId(val) {
+      const idInput = document.getElementById('anime-id');
+      const slug = val.toLowerCase()
+                      .replace(/[^a-z0-9\s-]/g, '')
+                      .replace(/\s+/g, '-')
+                      .replace(/-+/g, '-');
+      idInput.value = slug;
+    }
+
+    // Dynamic Row Adder
+    function addEpisodeRow() {
+      episodeCount++;
+      const container = document.getElementById('episodes-container');
+      const row = document.createElement('div');
+      row.className = 'episode-box';
+      row.id = `ep-row-${episodeCount}`;
+      row.innerHTML = `
+        <button class="remove-btn" type="button" onclick="removeEpisodeRow(${episodeCount})">X</button>
+        <div class="inline-group">
+          <div class="form-group">
+            <label>Episode Number</label>
+            <input type="number" class="ep-number" value="${episodeCount}" min="1" required>
+          </div>
+          <div class="form-group">
+            <label>Episode Title</label>
+            <input type="text" class="ep-title" placeholder="Episode Title..." required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Embed / Iframe URL</label>
+          <input type="text" class="ep-embed" placeholder="https://..." required>
+        </div>
+        <div class="form-group">
+          <label>Download Link</label>
+          <input type="text" class="ep-download" placeholder="https://..." required>
+        </div>
+      `;
+      container.appendChild(row);
+    }
+
+    function removeEpisodeRow(idNum) {
+      const element = document.getElementById(`ep-row-${idNum}`);
+      if(element) element.remove();
+    }
+
+    // JSON Payload Compiler
+    function generateCompilerOutput() {
+      const animeId = document.getElementById('anime-id').value.trim() || "unknown";
+      const title = document.getElementById('anime-title').value.trim();
+      const year = document.getElementById('release-year').value.trim();
+      const desc = document.getElementById('description').value.trim();
+      const poster = document.getElementById('poster-url').value.trim();
+      const banner = document.getElementById('banner-url').value.trim();
+      const type = document.getElementById('anime-type').value;
+      const dubType = document.getElementById('dub-type').value;
+      const rating = document.getElementById('rating').value.trim();
+      
+      const genresInput = document.getElementById('genres').value;
+      const genresArr = genresInput.split(',').map(g => g.trim()).filter(g => g !== "");
+      
+      const trending = document.getElementById('trending').checked;
+      const latest = document.getElementById('latest').checked;
+
+      const epBoxes = document.querySelectorAll('#episodes-container .episode-box');
+      const episodes = [];
+
+      epBoxes.forEach(box => {
+        const num = parseInt(box.querySelector('.ep-number').value);
+        const epTitle = box.querySelector('.ep-title').value.trim();
+        const embed = box.querySelector('.ep-embed').value.trim();
+        const download = box.querySelector('.ep-download').value.trim();
+        
+        episodes.push({
+          number: num,
+          title: epTitle,
+          embedUrl: embed,
+          downloadUrl: download
+        });
+      });
+
+      const animeDetailPayload = {
+        id: animeId,
+        title: title,
+        description: desc,
+        banner: banner,
+        poster: poster,
+        type: type,
+        dubType: dubType,
+        rating: rating,
+        releaseYear: year,
+        genres: genresArr,
+        episodes: episodes
+      };
+
+      const animeIndexEntryPayload = {
+        id: animeId,
+        title: title,
+        poster: poster,
+        type: type,
+        dubType: dubType,
+        rating: rating,
+        releaseYear: year,
+        genres: genresArr,
+        trending: trending,
+        latest: latest
+      };
+
+      const indStr = JSON.stringify(animeDetailPayload, null, 2);
+      const idxStr = JSON.stringify(animeIndexEntryPayload, null, 2);
+
+      document.getElementById('output-individual-json').textContent = indStr;
+      document.getElementById('output-index-json').textContent = idxStr;
+
+      const downloadBtn = document.getElementById('download-indiv-btn');
+      const dataUri = "data:application/json;charset=utf-8," + encodeURIComponent(indStr);
+      downloadBtn.href = dataUri;
+      downloadBtn.download = `${animeId}.json`;
+      downloadBtn.style.display = 'inline-block';
+    }
+
+    // Copy Utility
+    function copyContent(elementId) {
+      const textToCopy = document.getElementById(elementId).textContent;
+      if (textToCopy === "Empty output...") {
+        alert("Compile payload first!");
+        return;
+      }
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("Payload copied to clipboard!");
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    }
+  </script>
+
+</body>
+  </html>
