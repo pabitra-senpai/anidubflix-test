@@ -1,0 +1,38 @@
+[
+  {
+    "id": "demon-slayer-s1",
+    "title": "Demon Slayer: Kimetsu no Yaiba (Season 1)",
+    "poster": "https://files.catbox.moe/t6ezpv.jpg",
+    "type": "Series",
+    "dubType": "Official Dub",
+    "rating": "8.7",
+    "releaseYear": "2019",
+    "genres": ["Action", "Fantasy", "Adventure"],
+    "trending": true,
+    "latest": false
+  },
+  {
+    "id": "naruto-shippuden-hindi-fan",
+    "title": "Naruto Shippuden (Fan Dub)",
+    "poster": "https://image.tmdb.org/t/p/w500/zn7870as4re7TY6AY9X366vST9r.jpg",
+    "type": "Series",
+    "dubType": "Fan Dub",
+    "rating": "8.6",
+    "releaseYear": "2007",
+    "genres": ["Action", "Shounen", "Adventure"],
+    "trending": true,
+    "latest": true
+  },
+  {
+    "id": "your-name-movie",
+    "title": "Your Name",
+    "poster": "https://image.tmdb.org/t/p/w500/q7896XpSMySt78m9g8gXq1u7vU7.jpg",
+    "type": "Movie",
+    "dubType": "Official Dub",
+    "rating": "8.9",
+    "releaseYear": "2016",
+    "genres": ["Romance", "Drama", "Fantasy"],
+    "trending": false,
+    "latest": true
+  }
+]
