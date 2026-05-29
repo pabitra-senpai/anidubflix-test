@@ -1,0 +1,16 @@
+{
+  "id": "demon-slayer-s1",
+  "title": "Demon Slayer: Kimetsu no Yaiba (Season 1)",
+  "description": "A family is attacked by demons and only two members survive - Tanjiro and his sister Nezuko, who is turning into a demon slowly. Tanjiro sets out to become a demon slayer to avenge his family and cure his sister.",
+  "banner": "https://files.catbox.moe/pfimx3.jpg",
+  "poster": "https://files.catbox.moe/t6ezpv.jpg",
+  "type": "Series",
+  "dubType": "Official Dub",
+  "rating": "8.7",
+  "releaseYear": "2019",
+  "genres": ["Action", "Fantasy", "Adventure"],
+  "episodes": [
+    { "number": 1, "title": "Cruelty", "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ", "downloadUrl": "https://example.com/download/ds-ep1" },
+    { "number": 2, "title": "Trainer Sakonji Urokodaki", "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ", "downloadUrl": "https://example.com/download/ds-ep2" }
+  ]
+}
