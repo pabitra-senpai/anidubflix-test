@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anidubflix - Watch Hindi Fan Dub & Official Anime Free</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+  <div id="loader"><div class="spinner"></div></div>
+
+  <header>
+    <nav class="navbar">
+      <!-- High-Quality PNG-Style SVG Logo -->
+      <a href="index.html" class="logo">
+        <svg width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff003c" />
+              <stop offset="100%" stop-color="#00ffe7" />
+            </linearGradient>
+          </defs>
+          <rect x="2" y="5" width="30" height="30" rx="6" fill="url(#logo-grad)" opacity="0.15" stroke="url(#logo-grad)" stroke-width="1.5"/>
+          <path d="M12 12L22 20L12 28V12Z" fill="url(#logo-grad)"/>
+          <text x="42" y="27" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="20" fill="url(#logo-grad)" style="letter-spacing: 0.5px;">ANIDUB</text>
+          <text x="122" y="27" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="20" fill="#ffffff" style="letter-spacing: 0.5px;">FLIX</text>
+        </svg>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="anime.html">Anime</a></li>
+        <li><a href="anime.html?dub=official">Official Dub</a></li>
+        <li><a href="anime.html?dub=fan">Fan Dub</a></li>
+        <li><a href="contact.html">Request Anime</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="search-container">
+          <i class="fas fa-search"></i>
+          <input type="text" id="search-input" placeholder="Search anime...">
+        </div>
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero" id="hero-slider"></section>
+
+  <section id="continue-watching-section">
+    <div class="section-title">
+      <span>Continue Watching</span>
+    </div>
+    <div class="continue-watching-grid" id="cw-grid"></div>
+  </section>
+
+  <section>
+    <div class="section-title">
+      <span>Trending Highlights</span>
+      <a href="anime.html" class="btn btn-secondary btn-sm">View All</a>
+    </div>
+    <div class="anime-grid" id="trending-grid"></div>
+  </section>
+
+  <section>
+    <div class="section-title">
+      <span>Recently Added Releases</span>
+    </div>
+    <div class="anime-grid" id="latest-grid"></div>
+  </section>
+
+  <section class="social-section">
+    <h2>Join the Community</h2>
+    <p>Get instant release schedules and request links directly through social communities.</p>
+    <div class="social-grid">
+      <a href="https://t.me/" target="_blank" class="social-card telegram-card">
+        <i class="fab fa-telegram-plane" style="color:#0088cc"></i>
+        <span>Telegram Link</span>
+      </a>
+      <a href="https://instagram.com/" target="_blank" class="social-card instagram-card">
+        <i class="fab fa-instagram" style="color:#e1306c"></i>
+        <span>Instagram</span>
+      </a>
+      <a href="https://youtube.com/" target="_blank" class="social-card youtube-card">
+        <i class="fab fa-youtube" style="color:#ff0000"></i>
+        <span>YouTube</span>
+      </a>
+      <a href="https://discord.gg/" target="_blank" class="social-card discord-card">
+        <i class="fab fa-discord" style="color:#5865f2"></i>
+        <span>Discord Server</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <a href="index.html" class="logo">
+          <svg width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <use href="#logo-grad"/>
+            <rect x="2" y="5" width="30" height="30" rx="6" fill="url(#logo-grad)" opacity="0.15" stroke="url(#logo-grad)" stroke-width="1.5"/>
+            <path d="M12 12L22 20L12 28V12Z" fill="url(#logo-grad)"/>
+            <text x="42" y="27" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="20" fill="url(#logo-grad)">ANIDUB</text>
+            <text x="122" y="27" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="20" fill="#ffffff">FLIX</text>
+          </svg>
+        </a>
+        <p style="margin-top: 1rem; line-height: 1.6;">Your leading streaming platform for viewing high-quality Hindi Fan Dubbed and Official Dubbed anime.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="anime.html">Directory</a></li>
+          <li><a href="contact.html">Request Form</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal Links</h4>
+        <ul>
+          <li><a href="dmca.html">DMCA Takedown</a></li>
+          <li><a href="privacy.html">Privacy Regulations</a></li>
+          <li><a href="about.html">About Developer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Anidubflix. Stream and Community System. Built on open source.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/slider.js"></script>
+  <script src="js/search.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const trendingGrid = document.getElementById('trending-grid');
+      const latestGrid = document.getElementById('latest-grid');
+      
+      const animeData = await window.fetchAnimeIndex();
+
+      if (trendingGrid && animeData.length) {
+        trendingGrid.innerHTML = animeData
+          .filter(anime => anime.trending)
+          .map(anime => window.createAnimeCard(anime))
+          .join('');
+      }
+
+      if (latestGrid && animeData.length) {
+        latestGrid.innerHTML = animeData
+          .filter(anime => anime.latest)
+          .map(anime => window.createAnimeCard(anime))
+          .join('');
+      }
+    });
+  </script>
+</body>
+</html>
