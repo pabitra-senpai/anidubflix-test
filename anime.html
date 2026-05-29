@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Directory - Anidubflix</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <svg width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff003c" />
+              <stop offset="100%" stop-color="#00ffe7" />
+            </linearGradient>
+          </defs>
+          <rect x="2" y="5" width="30" height="30" rx="6" fill="url(#logo-grad)" opacity="0.15" stroke="url(#logo-grad)" stroke-width="1.5"/>
+          <path d="M12 12L22 20L12 28V12Z" fill="url(#logo-grad)"/>
+          <text x="42" y="27" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="20" fill="url(#logo-grad)" style="letter-spacing: 0.5px;">ANIDUB</text>
+          <text x="122" y="27" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="20" fill="#ffffff" style="letter-spacing: 0.5px;">FLIX</text>
+        </svg>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="anime.html" class="active">Anime</a></li>
+        <li><a href="anime.html?dub=official">Official Dub</a></li>
+        <li><a href="anime.html?dub=fan">Fan Dub</a></li>
+        <li><a href="contact.html">Request Anime</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="search-container">
+          <i class="fas fa-search"></i>
+          <input type="text" id="search-input" placeholder="Search anime...">
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section style="margin-top: 80px;">
+    <div class="section-title">
+      <span>Explore Anime Directory</span>
+    </div>
+
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+      <a href="anime.html" class="btn btn-secondary">All Content</a>
+      <a href="anime.html?dub=official" class="btn btn-secondary">Official Dub</a>
+      <a href="anime.html?dub=fan" class="btn btn-secondary">Fan Dub</a>
+      <a href="anime.html?genre=Action" class="btn btn-secondary">Action</a>
+      <a href="anime.html?genre=Fantasy" class="btn btn-secondary">Fantasy</a>
+      <a href="anime.html?genre=Romance" class="btn btn-secondary">Romance</a>
+    </div>
+
+    <div class="anime-grid" id="anime-list-grid"></div>
+  </section>
+
+  <script src="js/main.js"></script>
+  <script src="js/search.js"></script>
+</body>
+</html>
