@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Anidubflix</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <svg width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff003c" />
+              <stop offset="100%" stop-color="#00ffe7" />
+            </linearGradient>
+          </defs>
+          <rect x="2" y="5" width="30" height="30" rx="6" fill="url(#logo-grad)" opacity="0.15" stroke="url(#logo-grad)" stroke-width="1.5"/>
+          <path d="M12 12L22 20L12 28V12Z" fill="url(#logo-grad)"/>
+          <text x="42" y="27" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="20" fill="url(#logo-grad)" style="letter-spacing: 0.5px;">ANIDUB</text>
+          <text x="122" y="27" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="20" fill="#ffffff" style="letter-spacing: 0.5px;">FLIX</text>
+        </svg>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="anime.html">Anime</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      </div>
+    </nav>
+  </header>
+
+  <div style="max-width: 800px; margin: 120px auto 40px; padding: 2.5rem; background: var(--card-color); border: 1px solid var(--border-glass); border-radius:10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+    <h1 style="font-size: 2rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.8rem;">About Anidubflix</h1>
+    <p style="color:var(--text-secondary); line-height:1.7; margin-top:1rem; font-size: 1rem;">
+      Anidubflix is a community-driven initiative built to organize, archive, and deliver free Hindi Dubbed and Fan Dubbed anime content. Our platform provides clean and responsive layout structures without tracking heavy backend databases on local hosting platforms.
+    </p>
+    <p style="color:var(--text-secondary); line-height:1.7; margin-top:1rem; font-size: 1rem;">
+      This project leverages modern modular setups, optimizing image loading, rendering speeds, and offline caching via Service Workers. The main objective is to provide fans with an intuitive, clutter-free streaming experience while keeping resources lightweight and easy to maintain.
+    </p>
+    <a href="index.html" class="btn btn-primary" style="margin-top:2.5rem; padding: 0.8rem 1.6rem;"><i class="fas fa-arrow-left"></i> Back to Home</a>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
