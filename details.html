@@ -123,7 +123,13 @@
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="anime.html">Anime</a></li>
+        <li><a href="anime.html?dub=official">Official Dub</a></li>
+        <li><a href="anime.html?dub=fan">Fan Dub</a></li>
+        <li><a href="contact.html">Request Anime</a></li>
       </ul>
+      <div class="nav-right">
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      </div>
     </nav>
   </header>
 
@@ -174,20 +180,8 @@
       document.getElementById('details-dub').textContent = anime.dubType;
       document.getElementById('details-desc').textContent = anime.description;
       
-      let seasonAndEpisodeMeta = '';
-      if (anime.type === "Series") {
-        const totalEp = anime.episodes ? anime.episodes.length : 0;
-        const seasonNum = anime.season || 1;
-        seasonAndEpisodeMeta = `<span><i class="fas fa-tv"></i> Season ${seasonNum} (${totalEp} Episodes)</span>`;
-      } else {
-        seasonAndEpisodeMeta = `<span><i class="fas fa-film"></i> Movie</span>`;
-      }
-
-      document.getElementById('details-meta').innerHTML = `
-        <span><i class="fas fa-star"></i> ${anime.rating}</span>
-        <span><i class="fas fa-calendar-alt"></i> ${anime.releaseYear}</span>
-        ${seasonAndEpisodeMeta}
-      `;
+      let totalSeasons = 1;
+      let totalCumulativeEpisodes = anime.episodes ? anime.episodes.length : 0;
 
       // Dynamic Auto-grouping Seasonal Logic
       try {
@@ -207,6 +201,11 @@
         const relatedSeasons = allAnime.filter(item => {
           return getBaseTitle(item.title) === baseTitle && item.type === 'Series';
         });
+
+        if (relatedSeasons.length > 0) {
+          totalSeasons = relatedSeasons.length;
+          totalCumulativeEpisodes = relatedSeasons.reduce((sum, item) => sum + (item.totalEpisodes || 0), 0);
+        }
 
         if (relatedSeasons.length > 1) {
           // Sort seasons logically by season number or release year
@@ -234,6 +233,19 @@
       } catch (err) {
         console.error("Failed to load seasonal relations:", err);
       }
+
+      let seasonAndEpisodeMeta = '';
+      if (anime.type === "Series") {
+        seasonAndEpisodeMeta = `<span><i class="fas fa-tv"></i> ${totalSeasons} ${totalSeasons > 1 ? 'Seasons' : 'Season'} (${totalCumulativeEpisodes} Episodes)</span>`;
+      } else {
+        seasonAndEpisodeMeta = `<span><i class="fas fa-film"></i> Movie</span>`;
+      }
+
+      document.getElementById('details-meta').innerHTML = `
+        <span><i class="fas fa-star"></i> ${anime.rating}</span>
+        <span><i class="fas fa-calendar-alt"></i> ${anime.releaseYear}</span>
+        ${seasonAndEpisodeMeta}
+      `;
 
       const audioList = anime.audio ? anime.audio.join(', ') : 'Hindi';
       const genresList = anime.genres ? anime.genres.join(', ') : 'N/A';
