@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anidubflix JSON Compiler - Fully Responsive & Themes</title>
+  <title>Anidubflix JSON Compiler - Season & Audio Support</title>
   <style>
-    /* CSS Variables for Dynamic Theme Changing */
     #termux-root {
       --bg: #050508;
       --panel-bg: #0a0a0f;
@@ -25,7 +24,6 @@
       transition: all 0.3s ease;
     }
 
-    /* Theme 2: Matrix Cyan */
     #termux-root.theme-matrix {
       --bg: #020617;
       --panel-bg: #0f172a;
@@ -36,7 +34,6 @@
       --border: #0284c7;
     }
 
-    /* Theme 3: Fallout Amber */
     #termux-root.theme-amber {
       --bg: #0a0702;
       --panel-bg: #140e05;
@@ -47,7 +44,6 @@
       --border: #664400;
     }
 
-    /* Theme 4: Dracula Vampire */
     #termux-root.theme-dracula {
       --bg: #1e1e2e;
       --panel-bg: #252538;
@@ -58,7 +54,6 @@
       --border: #44475a;
     }
 
-    /* Theme 5: MS-DOS Blue */
     #termux-root.theme-dos {
       --bg: #000088;
       --panel-bg: #0000aa;
@@ -82,7 +77,6 @@
       line-height: 1.4;
     }
 
-    /* Dynamic ASCII scale to fit tiny screens */
     #termux-root .ascii-logo {
       font-size: clamp(0.35rem, 1.2vw, 0.95rem);
       line-height: 1.2;
@@ -92,7 +86,6 @@
       color: var(--accent);
     }
 
-    /* 100% Autofit Grid Engine */
     #termux-root .terminal-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -146,7 +139,6 @@
       box-shadow: 0 0 8px rgba(0, 255, 255, 0.15);
     }
 
-    /* Auto-wrap form controls on super narrow mobile views */
     #termux-root .inline-group {
       display: grid;
       grid-template-columns: 1fr;
@@ -159,7 +151,6 @@
       }
     }
 
-    /* Episode Row Styles */
     #termux-root .episode-box {
       border: 1px dashed var(--border);
       padding: 15px;
@@ -182,7 +173,6 @@
       border-radius: 4px;
     }
 
-    /* Terminal Action Buttons */
     #termux-root .btn-terminal {
       background: var(--accent);
       color: #000;
@@ -210,7 +200,6 @@
       color: #000;
     }
 
-    /* Outputs Panel */
     #termux-root .output-panel {
       display: flex;
       flex-direction: column;
@@ -254,7 +243,6 @@
       border-radius: 4px;
     }
 
-    /* Interactive Theme Changer Bar */
     #termux-root .theme-switcher-bar {
       margin-bottom: 20px;
       display: flex;
@@ -307,7 +295,6 @@
         > STATUS: ACTIVE AND WAITING FOR PAYLOAD... <span class="blink">█</span>
       </div>
 
-      <!-- Theme Switcher System -->
       <div class="theme-switcher-bar">
         <span style="color: var(--secondary); font-size: 0.85rem; font-weight: bold;">[SET THEME]:</span>
         <button class="theme-btn" onclick="switchTheme('')">1. TERMUX</button>
@@ -320,7 +307,6 @@
 
     <div class="terminal-grid">
       
-      <!-- INPUT FORM AREA -->
       <div class="input-panel">
         <h2 style="margin-top: 0; margin-bottom: 20px;">[INPUT PANEL]</h2>
         
@@ -343,6 +329,17 @@
         <div class="form-group">
           <label for="description">Description</label>
           <textarea id="description" rows="3" placeholder="A family is attacked by demons..." required></textarea>
+        </div>
+
+        <div class="inline-group">
+          <div class="form-group">
+            <label for="season-num">Season Number (Default 1)</label>
+            <input type="number" id="season-num" value="1" min="1" required>
+          </div>
+          <div class="form-group">
+            <label for="audio-languages">Audio Languages (Comma separated)</label>
+            <input type="text" id="audio-languages" placeholder="Hindi, English, Japanese" value="Hindi" required>
+          </div>
         </div>
 
         <div class="inline-group">
@@ -396,10 +393,8 @@
           </div>
         </div>
 
-        <!-- Dynamic Episodes Section -->
         <h3 style="border-bottom: 1px solid var(--border); padding-bottom: 5px; margin-top: 25px;">[EPISODES STREAMING ENGINE]</h3>
         <div id="episodes-container">
-          <!-- Default Row -->
           <div class="episode-box" id="ep-row-1">
             <div class="inline-group">
               <div class="form-group">
@@ -415,10 +410,6 @@
               <label>Embed / Iframe URL</label>
               <input type="text" class="ep-embed" value="https://www.youtube.com/embed/dQw4w9WgXcQ" placeholder="https://..." required>
             </div>
-            <div class="form-group">
-              <label>Download Link</label>
-              <input type="text" class="ep-download" value="https://example.com/download" placeholder="https://..." required>
-            </div>
           </div>
         </div>
 
@@ -426,10 +417,8 @@
         <button type="button" class="btn-terminal" onclick="generateCompilerOutput()">COMPILE PAYLOAD</button>
       </div>
 
-      <!-- COMPILER TERMINAL OUTPUTS -->
       <div class="output-panel">
         
-        <!-- Individual Anime Object File -->
         <div class="terminal-box" data-title="data/anime/<anime-id>.json">
           <p style="color: var(--text-main); font-size:0.85rem; margin-top:5px;">This object details the whole dynamic page. Save this as a file with your Anime ID name inside "data/anime/".</p>
           <pre id="output-individual-json" class="code-output">Empty output...</pre>
@@ -437,7 +426,6 @@
           <a id="download-indiv-btn" style="display:none;" class="btn-terminal">Download .json</a>
         </div>
 
-        <!-- Main Index Array block -->
         <div class="terminal-box" data-title="Add to data/anime-index.json">
           <p style="color: var(--text-main); font-size:0.85rem; margin-top:5px;">Append/Push this block directly inside your main index.json array file to list on Homepage & Search views.</p>
           <pre id="output-index-json" class="code-output">Empty output...</pre>
@@ -453,16 +441,14 @@
   <script>
     let episodeCount = 1;
 
-    // Theme Switcher Controller
     function switchTheme(themeName) {
       const root = document.getElementById('termux-root');
-      root.className = ''; // reset previous theme styles
+      root.className = '';
       if (themeName) {
         root.classList.add('theme-' + themeName);
       }
     }
 
-    // Slug Generator
     function generateId(val) {
       const idInput = document.getElementById('anime-id');
       const slug = val.toLowerCase()
@@ -472,7 +458,6 @@
       idInput.value = slug;
     }
 
-    // Dynamic Row Adder
     function addEpisodeRow() {
       episodeCount++;
       const container = document.getElementById('episodes-container');
@@ -495,10 +480,6 @@
           <label>Embed / Iframe URL</label>
           <input type="text" class="ep-embed" placeholder="https://..." required>
         </div>
-        <div class="form-group">
-          <label>Download Link</label>
-          <input type="text" class="ep-download" placeholder="https://..." required>
-        </div>
       `;
       container.appendChild(row);
     }
@@ -508,7 +489,6 @@
       if(element) element.remove();
     }
 
-    // JSON Payload Compiler
     function generateCompilerOutput() {
       const animeId = document.getElementById('anime-id').value.trim() || "unknown";
       const title = document.getElementById('anime-title').value.trim();
@@ -519,7 +499,11 @@
       const type = document.getElementById('anime-type').value;
       const dubType = document.getElementById('dub-type').value;
       const rating = document.getElementById('rating').value.trim();
+      const season = parseInt(document.getElementById('season-num').value) || 1;
       
+      const audioInput = document.getElementById('audio-languages').value;
+      const audioArr = audioInput.split(',').map(a => a.trim()).filter(a => a !== "");
+
       const genresInput = document.getElementById('genres').value;
       const genresArr = genresInput.split(',').map(g => g.trim()).filter(g => g !== "");
       
@@ -533,13 +517,11 @@
         const num = parseInt(box.querySelector('.ep-number').value);
         const epTitle = box.querySelector('.ep-title').value.trim();
         const embed = box.querySelector('.ep-embed').value.trim();
-        const download = box.querySelector('.ep-download').value.trim();
         
         episodes.push({
           number: num,
           title: epTitle,
-          embedUrl: embed,
-          downloadUrl: download
+          embedUrl: embed
         });
       });
 
@@ -553,6 +535,8 @@
         dubType: dubType,
         rating: rating,
         releaseYear: year,
+        season: season,
+        audio: audioArr,
         genres: genresArr,
         episodes: episodes
       };
@@ -561,6 +545,7 @@
         id: animeId,
         title: title,
         poster: poster,
+        banner: banner,
         type: type,
         dubType: dubType,
         rating: rating,
@@ -583,7 +568,6 @@
       downloadBtn.style.display = 'inline-block';
     }
 
-    // Copy Utility
     function copyContent(elementId) {
       const textToCopy = document.getElementById(elementId).textContent;
       if (textToCopy === "Empty output...") {
@@ -597,6 +581,5 @@
       });
     }
   </script>
-
 </body>
-  </html>
+</html>
