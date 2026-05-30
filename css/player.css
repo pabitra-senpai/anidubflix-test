@@ -92,6 +92,36 @@
   box-shadow: 0 0 10px rgba(255, 0, 60, 0.35);
 }
 
+/* Season Tab styling inside player CSS for cross-compatibility */
+.season-tabs {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.season-tab-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.season-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.season-tab-btn.active {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 10px rgba(255, 0, 60, 0.35);
+}
+
 @media (max-width: 968px) {
   .watch-container {
     grid-template-columns: 1fr;
@@ -99,7 +129,7 @@
     padding-right: 4%;
   }
   .episode-sidebar {
-    max-height: 350px;
+    max-height: 450px;
   }
 }
 
