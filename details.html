@@ -57,6 +57,32 @@
     .missing-info-list strong {
       color: var(--text-color);
     }
+    /* Season Switcher Tab Buttons styling */
+    .season-tabs {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .season-tab-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-glass);
+      color: var(--text-color);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .season-tab-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .season-tab-btn.active {
+      background: var(--accent-color);
+      border-color: var(--accent-color);
+      box-shadow: 0 0 10px rgba(255, 0, 60, 0.35);
+    }
     @media (max-width: 768px) {
       .details-container {
         flex-direction: column;
@@ -69,6 +95,9 @@
       }
       .details-info {
         padding-top: 0;
+      }
+      .season-tabs {
+        justify-content: center;
       }
     }
   </style>
@@ -108,8 +137,15 @@
       <h1 id="details-title" style="font-size: 2.5rem; margin-bottom: 0.5rem;"></h1>
       <p id="details-dub" style="color: var(--accent-color); font-weight: bold; margin-bottom: 1rem;"></p>
       <div class="slide-meta" id="details-meta" style="margin-bottom: 1.5rem;"></div>
+      
       <p id="details-desc" style="line-height: 1.6; color: var(--text-secondary); margin-bottom: 1.5rem;"></p>
       
+      <!-- Multi-Season Selector Interface -->
+      <div id="season-selector-container" style="display: none; margin-bottom: 1.5rem;">
+        <label style="display:block; margin-bottom:0.6rem; font-weight:700; color:var(--text-color); font-size:0.9rem;">Available Seasons:</label>
+        <div class="season-tabs" id="season-tabs"></div>
+      </div>
+
       <div class="missing-info-list">
         <div><strong>Audio:</strong> <span id="details-audio"></span></div>
         <div><strong>Genres:</strong> <span id="details-genres"></span></div>
@@ -152,6 +188,52 @@
         <span><i class="fas fa-calendar-alt"></i> ${anime.releaseYear}</span>
         ${seasonAndEpisodeMeta}
       `;
+
+      // Dynamic Auto-grouping Seasonal Logic
+      try {
+        const allAnime = await window.fetchAnimeIndex();
+        
+        // Helper function to extract root title (e.g. removes "Season 1" or "(Season 1)")
+        const getBaseTitle = (t) => {
+          return t.replace(/\s*\(Season\s*\d+\)/i, '')
+                  .replace(/\s*Season\s*\d+/i, '')
+                  .replace(/\s*S\d+/i, '')
+                  .trim();
+        };
+
+        const baseTitle = getBaseTitle(anime.title);
+        
+        // Filter out same series seasons
+        const relatedSeasons = allAnime.filter(item => {
+          return getBaseTitle(item.title) === baseTitle && item.type === 'Series';
+        });
+
+        if (relatedSeasons.length > 1) {
+          // Sort seasons logically by season number or release year
+          relatedSeasons.sort((a, b) => {
+            const getSeasonNum = (titleText) => {
+              const match = titleText.match(/Season\s*(\d+)/i);
+              return match ? parseInt(match[1]) : (parseInt(a.releaseYear) || 0);
+            };
+            return getSeasonNum(a.title) - getSeasonNum(b.title);
+          });
+
+          const seasonTabs = document.getElementById('season-tabs');
+          seasonTabs.innerHTML = relatedSeasons.map(item => {
+            const sMatch = item.title.match(/Season\s*(\d+)/i);
+            const label = sMatch ? `Season ${sMatch[1]}` : item.title;
+            const isActive = item.id === anime.id ? 'active' : '';
+            return `
+              <a href="details.html?id=${item.id}" class="season-tab-btn ${isActive}">
+                ${label}
+              </a>
+            `;
+          }).join('');
+          document.getElementById('season-selector-container').style.display = 'block';
+        }
+      } catch (err) {
+        console.error("Failed to load seasonal relations:", err);
+      }
 
       const audioList = anime.audio ? anime.audio.join(', ') : 'Hindi';
       const genresList = anime.genres ? anime.genres.join(', ') : 'N/A';
