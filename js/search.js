@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (window.location.pathname.includes('anime.html')) {
+  const grid = document.getElementById('anime-list-grid');
+  if (grid) {
     renderFilteredAnime();
   }
 });
