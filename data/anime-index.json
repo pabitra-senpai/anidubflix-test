@@ -1,27 +1,28 @@
 [
   {
-  "id": "naruto",
-  "title": "Naruto",
-  "poster": "https://anilist.co/anime/20/Naruto/",
-  "type": "Series",
-  "dubType": "Official Dub",
-  "rating": "8.4",
-  "releaseYear": "2002",
-  "genres": [
-    "Action",
-    "Adventure",
-    "Comedy",
-    "Drama",
-    "Fantasy",
-    "Supernatural"
-  ],
-  "trending": false,
-  "latest": true
+    "id": "naruto",
+    "title": "Naruto",
+    "poster": "https://files.catbox.moe/o6304b.jpg",
+    "type": "Series",
+    "dubType": "Official Dub",
+    "rating": "8.4",
+    "releaseYear": "2002",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Comedy",
+      "Drama",
+      "Fantasy",
+      "Supernatural"
+    ],
+    "trending": false,
+    "latest": true
   },
   {
     "id": "demon-slayer-s1",
     "title": "Demon Slayer: Kimetsu no Yaiba (Season 1)",
     "poster": "https://files.catbox.moe/t6ezpv.jpg",
+    "banner": "https://files.catbox.moe/pfimx3.jpg",
     "type": "Series",
     "dubType": "Official Dub",
     "rating": "8.7",
@@ -34,6 +35,7 @@
     "id": "naruto-shippuden-hindi-fan",
     "title": "Naruto Shippuden (Fan Dub)",
     "poster": "https://image.tmdb.org/t/p/w500/zn7870as4re7TY6AY9X366vST9r.jpg",
+    "banner": "https://files.catbox.moe/yp4s58.jpg",
     "type": "Series",
     "dubType": "Fan Dub",
     "rating": "8.6",
