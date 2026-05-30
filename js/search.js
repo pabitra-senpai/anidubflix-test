@@ -48,6 +48,13 @@ async function renderFilteredAnime() {
 
 window.createAnimeCard = function(anime) {
   const badgeClass = anime.dubType === 'Fan Dub' ? 'badge-fan' : 'badge-official';
+  
+  // ডাইনামিকালি কার্ডে Series এর বদলে S1 • 26 Eps ফরম্যাট তৈরি করা
+  let metaType = anime.type;
+  if (anime.type === 'Series' && anime.season) {
+    metaType = `S${anime.season} • ${anime.totalEpisodes || '?'} Eps`;
+  }
+  
   return `
     <div class="anime-card">
       <a href="details.html?id=${anime.id}">
@@ -60,7 +67,7 @@ window.createAnimeCard = function(anime) {
           <h3>${anime.title}</h3>
           <div class="card-meta">
             <span>${anime.releaseYear}</span>
-            <span>${anime.type}</span>
+            <span>${metaType}</span>
           </div>
         </div>
       </a>
