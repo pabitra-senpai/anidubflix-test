@@ -47,6 +47,16 @@
       flex-grow: 1;
       padding-top: 100px;
     }
+    .missing-info-list {
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+    .missing-info-list strong {
+      color: var(--text-color);
+    }
     @media (max-width: 768px) {
       .details-container {
         flex-direction: column;
@@ -98,7 +108,13 @@
       <h1 id="details-title" style="font-size: 2.5rem; margin-bottom: 0.5rem;"></h1>
       <p id="details-dub" style="color: var(--accent-color); font-weight: bold; margin-bottom: 1rem;"></p>
       <div class="slide-meta" id="details-meta" style="margin-bottom: 1.5rem;"></div>
-      <p id="details-desc" style="line-height: 1.6; color: var(--text-secondary); margin-bottom: 2rem;"></p>
+      <p id="details-desc" style="line-height: 1.6; color: var(--text-secondary); margin-bottom: 1.5rem;"></p>
+      
+      <div class="missing-info-list">
+        <div><strong>Audio:</strong> <span id="details-audio"></span></div>
+        <div><strong>Genres:</strong> <span id="details-genres"></span></div>
+      </div>
+
       <div style="display: flex; gap: 1rem;">
         <a id="watch-btn" class="btn btn-primary"><i class="fas fa-play"></i> Watch Now</a>
         <button id="bookmark-btn" class="btn btn-secondary" onclick=""></button>
@@ -122,11 +138,25 @@
       document.getElementById('details-dub').textContent = anime.dubType;
       document.getElementById('details-desc').textContent = anime.description;
       
+      let seasonAndEpisodeMeta = '';
+      if (anime.type === "Series") {
+        const totalEp = anime.episodes ? anime.episodes.length : 0;
+        const seasonNum = anime.season || 1;
+        seasonAndEpisodeMeta = `<span><i class="fas fa-tv"></i> Season ${seasonNum} (${totalEp} Episodes)</span>`;
+      } else {
+        seasonAndEpisodeMeta = `<span><i class="fas fa-film"></i> Movie</span>`;
+      }
+
       document.getElementById('details-meta').innerHTML = `
         <span><i class="fas fa-star"></i> ${anime.rating}</span>
         <span><i class="fas fa-calendar-alt"></i> ${anime.releaseYear}</span>
-        <span><i class="fas fa-film"></i> ${anime.type}</span>
+        ${seasonAndEpisodeMeta}
       `;
+
+      const audioList = anime.audio ? anime.audio.join(', ') : 'Hindi';
+      const genresList = anime.genres ? anime.genres.join(', ') : 'N/A';
+      document.getElementById('details-audio').textContent = audioList;
+      document.getElementById('details-genres').textContent = genresList;
 
       document.getElementById('watch-btn').href = `watch.html?id=${anime.id}&ep=1`;
       
