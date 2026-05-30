@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const watchTitle = document.getElementById('watch-title');
   const watchEpTitle = document.getElementById('watch-ep-title');
   const epGrid = document.getElementById('ep-grid-list');
+  const watchSeasonTabs = document.getElementById('watch-season-tabs');
+  const seasonListHeader = document.getElementById('season-list-header');
 
   const selectedEpisode = anime.episodes.find(e => e.number === epNum) || anime.episodes[0];
 
@@ -29,5 +31,52 @@ document.addEventListener('DOMContentLoaded', async () => {
         ${ep.number}
       </a>
     `).join('');
+  }
+
+  // watch.html-এ ডাইনামিক সিজন সিলেক্টর রেন্ডার করার লজিক
+  try {
+    const allAnime = await window.fetchAnimeIndex();
+    
+    // রুট টাইটেল বা মেইন নাম বের করার হেল্পার ফাংশন
+    const getBaseTitle = (t) => {
+      return t.replace(/\s*\(Season\s*\d+\)/i, '')
+              .replace(/\s*Season\s*\d+/i, '')
+              .replace(/\s*S\d+/i, '')
+              .trim();
+    };
+
+    const baseTitle = getBaseTitle(anime.title);
+    
+    // একই মেইন নামের সব সিজন ফিল্টার করা
+    const relatedSeasons = allAnime.filter(item => {
+      return getBaseTitle(item.title) === baseTitle && item.type === 'Series';
+    });
+
+    if (relatedSeasons.length > 1 && watchSeasonTabs && seasonListHeader) {
+      // সিজনগুলোকে সঠিকভাবে সিকোয়েন্সে সর্ট করা
+      relatedSeasons.sort((a, b) => {
+        const getSeasonNum = (titleText) => {
+          const match = titleText.match(/Season\s*(\d+)/i);
+          return match ? parseInt(match[1]) : (parseInt(a.releaseYear) || 0);
+        };
+        return getSeasonNum(a.title) - getSeasonNum(b.title);
+      });
+
+      watchSeasonTabs.innerHTML = relatedSeasons.map(item => {
+        const sMatch = item.title.match(/Season\s*(\d+)/i);
+        const label = sMatch ? `Season ${sMatch[1]}` : item.title;
+        const isActive = item.id === anime.id ? 'active' : '';
+        return `
+          <a href="watch.html?id=${item.id}&ep=1" class="season-tab-btn ${isActive}">
+            ${label}
+          </a>
+        `;
+      }).join('');
+      
+      watchSeasonTabs.style.display = 'flex';
+      seasonListHeader.style.display = 'block';
+    }
+  } catch (err) {
+    console.error("Failed to load seasonal tabs on watch page:", err);
   }
 });
