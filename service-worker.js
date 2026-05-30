@@ -1,4 +1,4 @@
-const cacheName = 'anidubflix-v3';
+const cacheName = 'anidubflix-v4';
 const assets = [
   '/',
   '/index.html',
