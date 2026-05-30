@@ -55,5 +55,26 @@
     "genres": ["Romance", "Drama", "Fantasy"],
     "trending": false,
     "latest": true
+  },
+  {
+  "id": "jujutsu-kaisen-the-culling-game-part-1",
+  "title": "Jujutsu Kaisen: The Culling Game Part 1",
+  "poster": "https://files.catbox.moe/alcjrl.jpg",
+  "banner": "https://files.catbox.moe/huwdbd.png",
+  "type": "Series",
+  "season": 1,
+  "totalEpisodes": 1,
+  "dubType": "Official Dub",
+  "rating": "4.9",
+  "releaseYear": "2020",
+  "genres": [
+    "Action",
+    "Drama",
+    "Fantasy",
+    "Shonen",
+    "Supernatural"
+  ],
+  "trending": true,
+  "latest": false
   }
 ]
