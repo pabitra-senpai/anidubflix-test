@@ -8,7 +8,8 @@
   }
 }
 
-@media (max-width: 768px) {
+/* Breakpoint adjusted to 968px to prevent overlap on landscape mobile screens */
+@media (max-width: 968px) {
   .nav-links {
     position: fixed;
     top: 60px;
@@ -31,8 +32,11 @@
     display: block;
   }
   .hero {
-    height: 50vh;
-    min-height: 380px;
+    height: 55vh;
+    min-height: 400px;
+  }
+  .slide-content {
+    padding-top: 50px; /* Offset to prevent header overlap */
   }
   .slide-title {
     font-size: 1.6rem;
@@ -52,9 +56,25 @@
   .navbar {
     padding: 0.7rem 4%;
   }
+  
+  /* Retained and styled search-container for compact mobile layouts */
   .search-container {
-    display: none;
+    display: block;
   }
+  .search-container input {
+    width: 100px;
+    padding: 0.45rem 0.8rem 0.45rem 2rem;
+    font-size: 0.8rem;
+    border-radius: 16px;
+  }
+  .search-container input:focus {
+    width: 130px;
+  }
+  .search-container i {
+    left: 10px;
+    font-size: 0.8rem;
+  }
+
   .slide-title {
     font-size: 1.3rem;
   }
@@ -62,9 +82,25 @@
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 0.8rem;
   }
+  
+  /* Adjusted to 2-column layout to prevent giant single-column cards on mobile viewports */
   .continue-watching-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
   }
+  .cw-card {
+    border-radius: 6px;
+  }
+  .cw-info {
+    padding: 0.5rem;
+  }
+  .cw-title {
+    font-size: 0.75rem;
+  }
+  .cw-ep {
+    font-size: 0.65rem;
+  }
+
   .social-grid {
     grid-template-columns: 1fr 1fr;
     gap: 0.8rem;
