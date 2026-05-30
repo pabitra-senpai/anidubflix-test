@@ -185,7 +185,7 @@ header {
   display: flex;
   align-items: center;
   background-size: cover;
-  background-position: center 25%;
+  background-position: center center; /* updated to keep characters centered on portrait displays */
 }
 .slide.active {
   opacity: 1;
