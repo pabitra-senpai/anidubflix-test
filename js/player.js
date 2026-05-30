@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const watchTitle = document.getElementById('watch-title');
   const watchEpTitle = document.getElementById('watch-ep-title');
   const epGrid = document.getElementById('ep-grid-list');
-  const downloadBtn = document.getElementById('download-btn');
 
   const selectedEpisode = anime.episodes.find(e => e.number === epNum) || anime.episodes[0];
 
@@ -21,10 +20,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     watchTitle.textContent = anime.title;
     watchEpTitle.textContent = `Episode ${selectedEpisode.number}: ${selectedEpisode.title}`;
     
-    if (downloadBtn) {
-      downloadBtn.href = selectedEpisode.downloadUrl;
-    }
-
     saveWatchProgress(anime.id, selectedEpisode.number, anime.title, anime.poster, 100);
   }
 
