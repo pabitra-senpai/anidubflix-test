@@ -15,7 +15,7 @@ class HeroSlider {
     if (slidesData.length === 0) return;
 
     this.container.innerHTML = slidesData.map((anime, index) => `
-      <div class="slide ${index === 0 ? 'active' : ''}" style="background-image: url('${anime.poster}');">
+      <div class="slide ${index === 0 ? 'active' : ''}" style="background-image: url('${anime.banner || anime.poster}');">
         <div class="slide-content">
           <span class="slide-tag">${anime.dubType}</span>
           <h2 class="slide-title">${anime.title}</h2>
