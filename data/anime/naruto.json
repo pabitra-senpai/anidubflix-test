@@ -1,27 +1,34 @@
 {
   "id": "naruto",
   "title": "Naruto",
-  "description": "Naruto Uzumaki, a hyperactive and knuckle-headed ninja, lives in Konohagakure, the Hidden Leaf village. Moments prior to his birth, a huge demon known as the Kyuubi, the Nine-tailed Fox, attacked Konohagakure and wreaked havoc. In order to put an end to the Kyuubi's rampage, the leader of the village, the 4th Hokage, sacrificed his life and sealed the monstrous beast inside the newborn Naruto.\n\nShunned because of the presence of the Kyuubi inside him, Naruto struggles to find his place in the village. He strives to become the Hokage of Konohagakure, and he meets many friends and foes along the way.\n\n(Source: MAL Rewrite)",
-  "banner": "https://files.catbox.moe/yp4s58.jpg",
-  "poster": "https://files.catbox.moe/o6304b.jpg",
+  "description": "Naruto Uzumaki is a hyperactive and knuckle-headed ninja still living in Konohagakure. Shunned because of the Kyuubi inside him, Naruto struggles to find his place in the village, while his burning desire to become the Hokage of Konohagakure leads him not only to some great new friends, but also some deadly foes.",
+  "banner": "https://files.catbox.moe/bbw8sq.webp",
+  "poster": "https://files.catbox.moe/uvmaek.jpeg",
   "type": "Series",
   "dubType": "Official Dub",
   "rating": "8.4",
   "releaseYear": "2002",
+  "season": 1,
+  "audio": [
+    "Bengali",
+    "English",
+    "Hindi",
+    "Malayalam",
+    "Tamil",
+    "Telugu"
+  ],
   "genres": [
     "Action",
     "Adventure",
-    "Comedy",
     "Drama",
     "Fantasy",
-    "Supernatural"
+    "Shonen"
   ],
   "episodes": [
     {
       "number": 1,
-      "title": "Enter: Naruto Uzumaki",
-      "embedUrl": "https://v.animethemes.moe/Naruto-OP1.webm",
-      "downloadUrl": ""
+      "title": "He Appears! Naruto Uzumaki",
+      "embedUrl": "https://as-cdn21.top/video/36660e59856b4de58a219bcf4e27eba3"
     }
   ]
 }
